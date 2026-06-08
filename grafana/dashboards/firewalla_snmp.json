@@ -648,7 +648,7 @@
           "refId": "StandardVariableQuery"
         },
         "refresh": 2,
-        "regex": "",
+        "regex": "^[A-Za-z].*",
         "sort": 1,
         "type": "query"
       }
@@ -662,5 +662,5 @@
   "timezone": "browser",
   "title": "Firewalla \u2014 SNMP",
   "uid": "firewalla-snmp",
-  "version": 4
+  "version": 5
 }
