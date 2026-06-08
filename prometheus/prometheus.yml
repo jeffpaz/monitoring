@@ -8,7 +8,15 @@ scrape_configs:
 
   - job_name: 'firewalla'
     static_configs:
-      - targets: ['192.168.10.1']     # ← Change if your Firewalla IP is different
+      - targets: ['192.168.10.1']
+        labels:
+          site: MSP
+      - targets: ['192.168.20.1']
+        labels:
+          site: CBN
+      - targets: ['192.168.30.1']
+        labels:
+          site: PHX
     metrics_path: /snmp
     params:
       module: [if_mib]

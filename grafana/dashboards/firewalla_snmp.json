@@ -2,7 +2,7 @@
   "__inputs": [],
   "__requires": [],
   "annotations": { "list": [] },
-  "description": "Firewalla MSP — SNMP interface monitoring via snmp-exporter if_mib",
+  "description": "Firewalla — SNMP interface monitoring via snmp-exporter if_mib",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
@@ -48,13 +48,13 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "rate(ifHCInOctets{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}[2m]) * 8",
+          "expr": "rate(ifHCInOctets{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m]) * 8",
           "legendFormat": "▲ {{ifDescr}}",
           "refId": "A"
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "rate(ifHCOutOctets{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}[2m]) * 8",
+          "expr": "rate(ifHCOutOctets{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m]) * 8",
           "legendFormat": "▼ {{ifDescr}}",
           "refId": "B"
         }
@@ -87,13 +87,13 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "rate(ifHCInUcastPkts{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}[2m])",
+          "expr": "rate(ifHCInUcastPkts{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "▲ {{ifDescr}}",
           "refId": "A"
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "rate(ifHCOutUcastPkts{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}[2m])",
+          "expr": "rate(ifHCOutUcastPkts{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "▼ {{ifDescr}}",
           "refId": "B"
         }
@@ -126,25 +126,25 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "rate(ifInErrors{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}[2m])",
+          "expr": "rate(ifInErrors{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "In Err {{ifDescr}}",
           "refId": "A"
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "rate(ifOutErrors{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}[2m])",
+          "expr": "rate(ifOutErrors{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "Out Err {{ifDescr}}",
           "refId": "B"
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "rate(ifInDiscards{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}[2m])",
+          "expr": "rate(ifInDiscards{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "In Drop {{ifDescr}}",
           "refId": "C"
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "rate(ifOutDiscards{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}[2m])",
+          "expr": "rate(ifOutDiscards{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "Out Drop {{ifDescr}}",
           "refId": "D"
         }
@@ -163,9 +163,7 @@
       "datasource": { "type": "prometheus", "uid": "prometheus" },
       "fieldConfig": {
         "defaults": {
-          "color": {
-            "mode": "thresholds"
-          },
+          "color": { "mode": "thresholds" },
           "mappings": [
             { "options": { "1": { "color": "green", "text": "up" }, "2": { "color": "red", "text": "down" }, "3": { "color": "yellow", "text": "testing" }, "7": { "color": "blue", "text": "lowerLayerDown" } }, "type": "value" }
           ],
@@ -194,7 +192,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "ifOperStatus{instance=\"192.168.10.1\", ifDescr!~\"lo|ifb.*\"}",
+          "expr": "ifOperStatus{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}",
           "legendFormat": "{{ifDescr}}",
           "instant": true,
           "refId": "A"
@@ -236,7 +234,7 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "ifHighSpeed{instance=\"192.168.10.1\", ifDescr!~\"ifb.*\"}",
+          "expr": "ifHighSpeed{instance=\"$instance\", ifDescr!~\"ifb.*\"}",
           "legendFormat": "{{ifDescr}}",
           "instant": true,
           "refId": "A",
@@ -244,7 +242,7 @@
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "ifOperStatus{instance=\"192.168.10.1\", ifDescr!~\"ifb.*\"}",
+          "expr": "ifOperStatus{instance=\"$instance\", ifDescr!~\"ifb.*\"}",
           "legendFormat": "{{ifDescr}}",
           "instant": true,
           "refId": "B",
@@ -252,7 +250,7 @@
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "ifMtu{instance=\"192.168.10.1\", ifDescr!~\"ifb.*\"}",
+          "expr": "ifMtu{instance=\"$instance\", ifDescr!~\"ifb.*\"}",
           "legendFormat": "{{ifDescr}}",
           "instant": true,
           "refId": "C",
@@ -299,13 +297,13 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "snmp_scrape_duration_seconds{instance=\"192.168.10.1\"}",
+          "expr": "snmp_scrape_duration_seconds{instance=\"$instance\"}",
           "legendFormat": "Total scrape",
           "refId": "A"
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "snmp_scrape_walk_duration_seconds{instance=\"192.168.10.1\"}",
+          "expr": "snmp_scrape_walk_duration_seconds{instance=\"$instance\"}",
           "legendFormat": "Walk duration",
           "refId": "B"
         }
@@ -333,19 +331,19 @@
       "targets": [
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "snmp_scrape_pdus_returned{instance=\"192.168.10.1\"}",
+          "expr": "snmp_scrape_pdus_returned{instance=\"$instance\"}",
           "legendFormat": "PDUs returned",
           "refId": "A"
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "snmp_scrape_packets_sent{instance=\"192.168.10.1\"}",
+          "expr": "snmp_scrape_packets_sent{instance=\"$instance\"}",
           "legendFormat": "Packets sent",
           "refId": "B"
         },
         {
           "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "snmp_scrape_packets_retried{instance=\"192.168.10.1\"}",
+          "expr": "snmp_scrape_packets_retried{instance=\"$instance\"}",
           "legendFormat": "Retries",
           "refId": "C"
         }
@@ -357,11 +355,32 @@
   "refresh": "30s",
   "schemaVersion": 39,
   "tags": ["snmp", "firewalla", "network"],
-  "templating": { "list": [] },
+  "templating": {
+    "list": [
+      {
+        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "definition": "label_values(ifOperStatus{job=\"firewalla\"}, instance)",
+        "hide": 0,
+        "includeAll": false,
+        "label": "Device",
+        "multi": false,
+        "name": "instance",
+        "options": [],
+        "query": {
+          "query": "label_values(ifOperStatus{job=\"firewalla\"}, instance)",
+          "refId": "StandardVariableQuery"
+        },
+        "refresh": 2,
+        "regex": "",
+        "sort": 1,
+        "type": "query"
+      }
+    ]
+  },
   "time": { "from": "now-3h", "to": "now" },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Firewalla MSP — SNMP",
+  "title": "Firewalla — SNMP",
   "uid": "firewalla-snmp",
   "version": 1
 }
