@@ -1,100 +1,166 @@
 {
   "__inputs": [],
   "__requires": [],
-  "annotations": { "list": [] },
-  "description": "Firewalla — SNMP interface monitoring via snmp-exporter if_mib",
+  "annotations": {
+    "list": []
+  },
+  "description": "Firewalla \u2014 SNMP interface monitoring via snmp-exporter if_mib",
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 1,
-  "id": null,
+  "id": 1448730071515136,
   "links": [],
   "panels": [
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 0 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 0
+      },
       "id": 100,
       "title": "Interface Traffic",
       "type": "row"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
-            "lineWidth": 1,
             "fillOpacity": 10,
+            "lineWidth": 1,
             "showPoints": "never",
             "spanNulls": true
           },
-          "unit": "bps",
-          "min": 0
+          "min": 0,
+          "unit": "bps"
         },
         "overrides": [
           {
-            "matcher": { "id": "byFrameRefID", "options": "B" },
+            "matcher": {
+              "id": "byFrameRefID",
+              "options": "B"
+            },
             "properties": [
-              { "id": "custom.transform", "value": "negative-Y" }
+              {
+                "id": "custom.transform",
+                "value": "negative-Y"
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 1 },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 1
+      },
       "id": 1,
       "options": {
-        "legend": { "calcs": ["mean", "max", "lastNotNull"], "displayMode": "table", "placement": "bottom" },
-        "tooltip": { "mode": "multi", "sort": "abs" }
+        "legend": {
+          "calcs": [
+            "mean",
+            "max",
+            "lastNotNull"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "abs"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "rate(ifHCInOctets{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m]) * 8",
-          "legendFormat": "▲ {{ifDescr}}",
+          "legendFormat": "\u25b2 {{ifDescr}}",
           "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "rate(ifHCOutOctets{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m]) * 8",
-          "legendFormat": "▼ {{ifDescr}}",
+          "legendFormat": "\u25bc {{ifDescr}}",
           "refId": "B"
         }
       ],
-      "title": "Interface Throughput (bits/sec) — In ▲ / Out ▼",
+      "title": "Interface Throughput (bits/sec) \u2014 In \u25b2 / Out \u25bc",
       "type": "timeseries"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
-            "lineWidth": 1,
             "fillOpacity": 10,
+            "lineWidth": 1,
             "showPoints": "never",
             "spanNulls": true
           },
-          "unit": "Bps",
-          "min": 0
+          "min": 0,
+          "unit": "Bps"
         },
         "overrides": []
       },
-      "gridPos": { "h": 7, "w": 12, "x": 0, "y": 10 },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 0,
+        "y": 10
+      },
       "id": 2,
       "options": {
-        "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom" },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "rate(ifHCInUcastPkts{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
-          "legendFormat": "▲ {{ifDescr}}",
+          "legendFormat": "\u25b2 {{ifDescr}}",
           "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "rate(ifHCOutUcastPkts{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
-          "legendFormat": "▼ {{ifDescr}}",
+          "legendFormat": "\u25bc {{ifDescr}}",
           "refId": "B"
         }
       ],
@@ -102,48 +168,80 @@
       "type": "timeseries"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
+          "color": {
+            "mode": "palette-classic"
+          },
           "custom": {
-            "lineWidth": 1,
             "fillOpacity": 10,
+            "lineWidth": 1,
             "showPoints": "never",
             "spanNulls": true
           },
-          "unit": "pps",
-          "min": 0
+          "min": 0,
+          "unit": "pps"
         },
         "overrides": []
       },
-      "gridPos": { "h": 7, "w": 12, "x": 12, "y": 10 },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 10
+      },
       "id": 3,
       "options": {
-        "legend": { "calcs": ["mean", "max"], "displayMode": "table", "placement": "bottom" },
-        "tooltip": { "mode": "multi", "sort": "desc" }
+        "legend": {
+          "calcs": [
+            "mean",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "desc"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "rate(ifInErrors{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "In Err {{ifDescr}}",
           "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "rate(ifOutErrors{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "Out Err {{ifDescr}}",
           "refId": "B"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "rate(ifInDiscards{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "In Drop {{ifDescr}}",
           "refId": "C"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "rate(ifOutDiscards{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}[2m])",
           "legendFormat": "Out Drop {{ifDescr}}",
           "refId": "D"
@@ -154,47 +252,100 @@
     },
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 17 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 17
+      },
       "id": 101,
       "title": "Interface Status",
       "type": "row"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "thresholds" },
+          "color": {
+            "mode": "thresholds"
+          },
           "mappings": [
-            { "options": { "1": { "color": "green", "text": "up" }, "2": { "color": "red", "text": "down" }, "3": { "color": "yellow", "text": "testing" }, "7": { "color": "blue", "text": "lowerLayerDown" } }, "type": "value" }
+            {
+              "options": {
+                "1": {
+                  "color": "green",
+                  "text": "up"
+                },
+                "2": {
+                  "color": "red",
+                  "text": "down"
+                },
+                "3": {
+                  "color": "yellow",
+                  "text": "testing"
+                },
+                "7": {
+                  "color": "blue",
+                  "text": "lowerLayerDown"
+                }
+              },
+              "type": "value"
+            }
           ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
-              { "color": "red", "value": null },
-              { "color": "green", "value": 1 },
-              { "color": "yellow", "value": 2 }
+              {
+                "color": "red",
+                "value": null
+              },
+              {
+                "color": "green",
+                "value": 1
+              },
+              {
+                "color": "yellow",
+                "value": 2
+              }
             ]
           }
         },
         "overrides": []
       },
-      "gridPos": { "h": 5, "w": 24, "x": 0, "y": 18 },
+      "gridPos": {
+        "h": 5,
+        "w": 24,
+        "x": 0,
+        "y": 18
+      },
       "id": 4,
       "options": {
         "colorMode": "background",
         "graphMode": "none",
         "justifyMode": "auto",
         "orientation": "auto",
-        "reduceOptions": { "calcs": ["lastNotNull"], "fields": "", "values": false },
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
         "text": {},
         "textMode": "auto"
       },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
-          "expr": "ifOperStatus{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"}",
-          "legendFormat": "{{ifDescr}}",
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
+          "expr": "ifOperStatus{instance=\"$instance\", ifDescr!~\"lo|ifb.*\"} == 1",
           "instant": true,
+          "legendFormat": "{{ifDescr}}",
           "refId": "A"
         }
       ],
@@ -202,69 +353,130 @@
       "type": "stat"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
-        "defaults": { "unit": "none" },
+        "defaults": {
+          "unit": "none"
+        },
         "overrides": [
           {
-            "matcher": { "id": "byName", "options": "Speed (Mbps)" },
-            "properties": [{ "id": "unit", "value": "none" }]
+            "matcher": {
+              "id": "byName",
+              "options": "Speed (Mbps)"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "none"
+              }
+            ]
           },
           {
-            "matcher": { "id": "byName", "options": "Oper Status" },
+            "matcher": {
+              "id": "byName",
+              "options": "Oper Status"
+            },
             "properties": [
               {
                 "id": "mappings",
                 "value": [
-                  { "options": { "1": { "color": "green", "text": "up" }, "2": { "color": "red", "text": "down" } }, "type": "value" }
+                  {
+                    "options": {
+                      "1": {
+                        "color": "green",
+                        "text": "up"
+                      },
+                      "2": {
+                        "color": "red",
+                        "text": "down"
+                      }
+                    },
+                    "type": "value"
+                  }
                 ]
               },
-              { "id": "custom.displayMode", "value": "color-background" }
+              {
+                "id": "custom.displayMode",
+                "value": "color-background"
+              }
             ]
           }
         ]
       },
-      "gridPos": { "h": 9, "w": 24, "x": 0, "y": 23 },
+      "gridPos": {
+        "h": 9,
+        "w": 24,
+        "x": 0,
+        "y": 23
+      },
       "id": 5,
       "options": {
         "cellHeight": "sm",
-        "footer": { "show": false },
+        "footer": {
+          "show": false
+        },
         "showHeader": true
       },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "ifHighSpeed{instance=\"$instance\", ifDescr!~\"ifb.*\"}",
-          "legendFormat": "{{ifDescr}}",
+          "format": "table",
           "instant": true,
-          "refId": "A",
-          "format": "table"
+          "legendFormat": "{{ifDescr}}",
+          "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "ifOperStatus{instance=\"$instance\", ifDescr!~\"ifb.*\"}",
-          "legendFormat": "{{ifDescr}}",
+          "format": "table",
           "instant": true,
-          "refId": "B",
-          "format": "table"
+          "legendFormat": "{{ifDescr}}",
+          "refId": "B"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "ifMtu{instance=\"$instance\", ifDescr!~\"ifb.*\"}",
-          "legendFormat": "{{ifDescr}}",
+          "format": "table",
           "instant": true,
-          "refId": "C",
-          "format": "table"
+          "legendFormat": "{{ifDescr}}",
+          "refId": "C"
         }
       ],
       "title": "Interface Details",
       "transformations": [
-        { "id": "merge", "options": {} },
+        {
+          "id": "merge",
+          "options": {}
+        },
         {
           "id": "organize",
           "options": {
-            "excludeByName": { "Time": true, "__name__": true, "instance": true, "job": true, "ifIndex": true },
-            "renameByName": { "ifDescr": "Interface", "Value #A": "Speed (Mbps)", "Value #B": "Oper Status", "Value #C": "MTU" }
+            "excludeByName": {
+              "Time": true,
+              "__name__": true,
+              "ifIndex": true,
+              "instance": true,
+              "job": true
+            },
+            "renameByName": {
+              "Value #A": "Speed (Mbps)",
+              "Value #B": "Oper Status",
+              "Value #C": "MTU",
+              "ifDescr": "Interface"
+            }
           }
         }
       ],
@@ -272,37 +484,67 @@
     },
     {
       "collapsed": false,
-      "gridPos": { "h": 1, "w": 24, "x": 0, "y": 32 },
+      "gridPos": {
+        "h": 1,
+        "w": 24,
+        "x": 0,
+        "y": 32
+      },
       "id": 102,
       "title": "Collector Health",
       "type": "row"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
-          "custom": { "lineWidth": 1, "fillOpacity": 5, "showPoints": "never" },
-          "unit": "s",
-          "min": 0
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "fillOpacity": 5,
+            "lineWidth": 1,
+            "showPoints": "never"
+          },
+          "min": 0,
+          "unit": "s"
         },
         "overrides": []
       },
-      "gridPos": { "h": 6, "w": 12, "x": 0, "y": 33 },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 0,
+        "y": 33
+      },
       "id": 6,
       "options": {
-        "legend": { "displayMode": "list", "placement": "bottom" },
-        "tooltip": { "mode": "single" }
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "single"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "snmp_scrape_duration_seconds{instance=\"$instance\"}",
           "legendFormat": "Total scrape",
           "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "snmp_scrape_walk_duration_seconds{instance=\"$instance\"}",
           "legendFormat": "Walk duration",
           "refId": "B"
@@ -312,37 +554,65 @@
       "type": "timeseries"
     },
     {
-      "datasource": { "type": "prometheus", "uid": "prometheus" },
+      "datasource": {
+        "type": "prometheus",
+        "uid": "prometheus"
+      },
       "fieldConfig": {
         "defaults": {
-          "color": { "mode": "palette-classic" },
-          "custom": { "lineWidth": 1, "fillOpacity": 5, "showPoints": "never" },
-          "unit": "none",
-          "min": 0
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "fillOpacity": 5,
+            "lineWidth": 1,
+            "showPoints": "never"
+          },
+          "min": 0,
+          "unit": "none"
         },
         "overrides": []
       },
-      "gridPos": { "h": 6, "w": 12, "x": 12, "y": 33 },
+      "gridPos": {
+        "h": 6,
+        "w": 12,
+        "x": 12,
+        "y": 33
+      },
       "id": 7,
       "options": {
-        "legend": { "displayMode": "list", "placement": "bottom" },
-        "tooltip": { "mode": "multi" }
+        "legend": {
+          "displayMode": "list",
+          "placement": "bottom"
+        },
+        "tooltip": {
+          "mode": "multi"
+        }
       },
       "targets": [
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "snmp_scrape_pdus_returned{instance=\"$instance\"}",
           "legendFormat": "PDUs returned",
           "refId": "A"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "snmp_scrape_packets_sent{instance=\"$instance\"}",
           "legendFormat": "Packets sent",
           "refId": "B"
         },
         {
-          "datasource": { "type": "prometheus", "uid": "prometheus" },
+          "datasource": {
+            "type": "prometheus",
+            "uid": "prometheus"
+          },
           "expr": "snmp_scrape_packets_retried{instance=\"$instance\"}",
           "legendFormat": "Retries",
           "refId": "C"
@@ -354,11 +624,18 @@
   ],
   "refresh": "30s",
   "schemaVersion": 39,
-  "tags": ["snmp", "firewalla", "network"],
+  "tags": [
+    "snmp",
+    "firewalla",
+    "network"
+  ],
   "templating": {
     "list": [
       {
-        "datasource": { "type": "prometheus", "uid": "prometheus" },
+        "datasource": {
+          "type": "prometheus",
+          "uid": "prometheus"
+        },
         "definition": "label_values(ifOperStatus{job=\"firewalla\"}, instance)",
         "hide": 0,
         "includeAll": false,
@@ -377,10 +654,13 @@
       }
     ]
   },
-  "time": { "from": "now-3h", "to": "now" },
+  "time": {
+    "from": "now-3h",
+    "to": "now"
+  },
   "timepicker": {},
   "timezone": "browser",
-  "title": "Firewalla — SNMP",
+  "title": "Firewalla \u2014 SNMP",
   "uid": "firewalla-snmp",
-  "version": 1
+  "version": 4
 }
