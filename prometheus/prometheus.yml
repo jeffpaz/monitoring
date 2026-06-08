@@ -1,0 +1,22 @@
+global:
+  scrape_interval: 30s
+
+scrape_configs:
+  - job_name: 'prometheus'
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: 'firewalla'
+    static_configs:
+      - targets: ['192.168.10.1']     # ← Change if your Firewalla IP is different
+    metrics_path: /snmp
+    params:
+      module: [if_mib]
+      auth: [public_v2]
+    relabel_configs:
+      - source_labels: [__address__]
+        target_label: __param_target
+      - source_labels: [__param_target]
+        target_label: instance
+      - target_label: __address__
+        replacement: snmp_exporter:9116
